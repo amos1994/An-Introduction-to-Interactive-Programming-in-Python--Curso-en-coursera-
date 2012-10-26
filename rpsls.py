@@ -23,7 +23,22 @@
 #  MA 02110-1301, USA.
 #  
 #  
+# Rock-paper-scissors-lizard-Spock template
 
+
+# The key idea of this program is to equate the strings
+# "rock", "paper", "scissors", "lizard", "Spock" to numbers
+# as follows:
+#
+# 0 - rock
+# 1 - Spock
+# 2 - paper
+# 3 - lizard
+# 4 - scissors
+
+import random
+
+# helper functions
 def number_to_name(number):
     # fill in your code below
 	if number == 0:
@@ -35,8 +50,7 @@ def number_to_name(number):
 	elif number == 3:
 		return "lizard"
 	elif number == 4:
-		return "scissors"
-		
+		return "scissors"	
 	
     # convert number to a name using if/elif/else
     # don't forget to return the result!
@@ -58,32 +72,32 @@ def name_to_number(name):
     # don't forget to return the result!
 
 
-#def rpsls(name): 
+def rpsls(name): 
     # fill in your code below
-
     # convert name to player_number using name_to_number
-
+	player = name_to_number(name)
     # compute random guess for comp_number using random.randrange()
-
+	comp = random.randrange(0,5)
     # compute difference of player_number and comp_number modulo five
-
+	mod = (player - comp) % 5
     # use if/elif/else to determine winner
-
-    # convert comp_number to name using number_to_name
-    
+	if mod == 3 or mod == 4:
+		result = "Computer wins!"
+	elif mod == 2 or mod == 1:
+		result = "Player wins!"
+	else:
+		result  = "Player and computer tie!"
     # print results
-
+	print "Player chooses",number_to_name(player)
+	print "Computer chooses",number_to_name(comp)
+	print result
+	print ""
    
 # test your code
-print name_to_number("rock")
-print name_to_number("Spock")
-print name_to_number("paper")
-print name_to_number("lizard")
-print name_to_number("scissors")
-print number_to_name(0)
-print number_to_name(1)
-print number_to_name(2)
-print number_to_name(3)
-print number_to_name(4)
+rpsls("rock")
+rpsls("Spock")
+rpsls("paper")
+rpsls("lizard")
+rpsls("scissors")
 # always remember to check your completed program against the grading rubric
 
