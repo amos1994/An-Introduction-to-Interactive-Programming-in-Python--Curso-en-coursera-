@@ -24,9 +24,20 @@
 #  
 #  
 
-#def number_to_name(number):
+def number_to_name(number):
     # fill in your code below
-    
+	if number == 0:
+		return "rock"
+	elif number == 1:
+		return "Spock"
+	elif number == 2:
+		return "paper"
+	elif number == 3:
+		return "lizard"
+	elif number == 4:
+		return "scissors"
+		
+	
     # convert number to a name using if/elif/else
     # don't forget to return the result!
 
@@ -69,5 +80,10 @@ print name_to_number("Spock")
 print name_to_number("paper")
 print name_to_number("lizard")
 print name_to_number("scissors")
+print number_to_name(0)
+print number_to_name(1)
+print number_to_name(2)
+print number_to_name(3)
+print number_to_name(4)
 # always remember to check your completed program against the grading rubric
 
