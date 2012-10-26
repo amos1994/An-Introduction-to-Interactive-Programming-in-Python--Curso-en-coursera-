@@ -1,7 +1,0 @@
-[project]
-name=coursera
-description=
-base_path=./
-run_cmd=
-regenerate=true
-type=All
