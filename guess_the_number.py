@@ -2,7 +2,7 @@
 # input will come from buttons and an input field
 # all output for the game will be printed in the console
 # Script URL: http://www.codeskulptor.org/#user3-QAwawnboHX-10.py
-
+# https://class.coursera.org/interactivepython-2012-001/human_grading/view_app/courses/204/assessments/12/submissions/18904
 # template for "Guess the number" mini-project
 # input will come from buttons and an input field
 # all output for the game will be printed in the console
