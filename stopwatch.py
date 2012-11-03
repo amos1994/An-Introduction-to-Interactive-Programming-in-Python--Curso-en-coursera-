@@ -1,12 +1,11 @@
-# URL http://www.codeskulptor.org/#user4-u7vTm4oKMV-5.py
+# URL http://www.codeskulptor.org/#user4-SRPkTWOma4VUs8H.py
 # template for "Stopwatch: The Game"
 import simplegui
 # define global variables
 time = 0
 stopwatch = "0:00:0"
-stops = 0
-successful = 0
 score = "0/0"
+running = False
 # define helper function format that converts integer
 # counting tenths of seconds into formatted string A:BC.D
 def format(time):
@@ -33,19 +32,46 @@ def format(time):
     
     return minutes+":"+seconds+":"+milliseconds
 
-
+def updateScore(intent):
+    global score
+    slash = score.find("/")
+    success = int(score[:slash])
+    attempts = int(score[slash+1:])
+    if intent == True:
+        success +=1
+    attempts +=1
+    score = str(success) + "/" + str(attempts)
+                                  
+        
+    
 # define event handlers for buttons; "Start", "Stop", "Reset"
 def start():
-    timer.start()
+    global running
+    if running != True:
+        timer.start()
+        running = True
 
 def stop():
-    timer.stop()
+    global running
+    if running == True:
+        timer.stop()
+        global stopwatch
+        intent = stopwatch[len(stopwatch)-1]
+        if intent=="0":
+            updateScore(True)
+        else:
+            updateScore(False)
+        running = False
     
 def reset():
+    global running
     global time
-    global stopwatch
-    timer.stop()
+    global score
+    if running == True:
+        timer.stop()
+        running = False
     time = -1
+    score = "0/0"
     tick()
     
 # define event handler for timer with 0.1 sec interval
@@ -54,24 +80,20 @@ def tick():
     global stopwatch
     time +=1
     stopwatch = format(time)
-    #print stopwatch
 
 # Handler to draw on canvas
 def clock(canvas):
-    canvas.draw_text(stopwatch, [75,118], 36, "White")    
-
-def intents(canvas):
-    canvas.draw_text(score, [250,24], 12, "Green")
-
+    canvas.draw_text(stopwatch, [75,118], 36, "White")
+    canvas.draw_text(score, [250,24], 12, "Lime")
+    
 # create frame
 frame = simplegui.create_frame("StopWatch", 300, 200,100)
 frame.set_canvas_background("Black")
 button1 = frame.add_button("Start", start, 100)
 button2 = frame.add_button("Stop", stop, 100)
 button3 = frame.add_button("Reset", reset, 100)
-timer = simplegui.create_timer(1, tick)
+timer = simplegui.create_timer(500, tick)
 frame.set_draw_handler(clock)
-frame.set_draw_handler(intents)
 
 # register event handlers
 
@@ -79,6 +101,7 @@ frame.set_draw_handler(intents)
 frame.start()
 
 # remember to review the grading rubric
+#Complete:
 #1 pt - The program successfully opens a frame.
 #1 pt - The program has a working "Start" button 
 #		that starts the timer.
@@ -98,9 +121,6 @@ frame.start()
 #		seconds and tenths of seconds but fails to always 
 #		allocate two digits 
 #		to seconds should receive 3 pts.
-#
-#
-#TODO
 #2 pts -The "Stop" button correctly updates the 
 #		success/attempts counters.  Give only one point 
 #		if hitting the "Stop" button changes the score 
@@ -113,3 +133,8 @@ frame.start()
 #		successful and total stops.  If the score is 
 #		correctly reported as a percentage instead, 
 #		give only one point.
+#
+#
+#TODO
+#....
+
