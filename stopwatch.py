@@ -1,31 +1,50 @@
 # template for "Stopwatch: The Game"
-# URL:http://www.codeskulptor.org/#user4-2RWIboh1eA-3.py
 import simplegui
 # define global variables
+time = 0
 
 # define helper function format that converts integer
 # counting tenths of seconds into formatted string A:BC.D
-#def format(t):
+def format(time):
+    milis = str(time)
+    sec = time // 10
+    mint = time // 600
+    
+    #Format Milis
+    aux = len(milis)
+    milis = milis[aux-1]
+    
+    #Format Seconds
+    
+    
+    return str(mint) + ":" + str(sec) + ":" + milis
 
-time = 0
 
 # define event handlers for buttons; "Start", "Stop", "Reset"
 def start():
-    print "start"
+    timer.start()
 
 def stop():
-    print "stop"
+    timer.stop()
     
 def reset():
-    print "reset"
+    global time
+    timer.stop()
+    time = 0
 # define event handler for timer with 0.1 sec interval
-    
+def tick():
+    global time
+    time +=1
+    result = format(time)
+    print result
+
 # create frame
 frame = simplegui.create_frame("StopWatch", 300, 200,100)
 frame.set_canvas_background("Black")
 button1 = frame.add_button("Start", start, 100)
 button2 = frame.add_button("Stop", stop, 100)
 button3 = frame.add_button("Reset", reset, 100)
+timer = simplegui.create_timer(10, tick)
 
 # register event handlers
 
